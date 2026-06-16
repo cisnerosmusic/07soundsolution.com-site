@@ -314,7 +314,14 @@
         <a href="https://wa.me/17863066414" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
       </div>
     </div>
-    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+    <form class="contact-form" action="https://formsubmit.co/info@07soundsolution.com" method="POST">
+      <!-- Config FormSubmit -->
+      <input type="hidden" name="_subject" value="Nuevo contacto desde 07soundsolution.com" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://07soundsolution.com/gracias.html" />
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
       <div class="field">
         <label for="name" data-es="Nombre" data-en="Name">Nombre</label>
         <input type="text" id="name" name="name" required />
@@ -328,9 +335,6 @@
         <textarea id="message" name="message" rows="5" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary btn-block" data-es="Enviar mensaje" data-en="Send message">Enviar mensaje</button>
-      <p class="form-note" data-es="Nota: para que el formulario envíe correos, conecta un servicio como Formspree (ver README)." data-en="Note: to make the form send emails, connect a service like Formspree (see README).">
-        Nota: para que el formulario envíe correos, conecta un servicio como Formspree (ver README).
-      </p>
     </form>
   </div>
 </section>
