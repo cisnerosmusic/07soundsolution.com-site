@@ -180,6 +180,15 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 .card-icon{font-size:1.8rem;margin-bottom:.7rem}
 .card h3{font-size:1.25rem;margin-bottom:.5rem}
 .card p{color:var(--muted);font-size:.96rem}
+.card-highlight{
+  background:linear-gradient(160deg,rgba(240,180,41,.10),rgba(232,118,26,.04)),var(--panel);
+  border-color:rgba(240,180,41,.45);
+}
+.card-cta{
+  display:inline-block;margin-top:14px;font-family:'Oswald',sans-serif;font-weight:500;
+  letter-spacing:1px;color:var(--accent);font-size:.95rem;transition:gap .2s,opacity .2s;
+}
+.card-cta:hover{opacity:.8}
 
 /* ---------- Credits ---------- */
 .credits-grid{
@@ -228,11 +237,4 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
   width:100%;background:var(--bg);border:1px solid var(--line);border-radius:9px;
   padding:12px 14px;color:var(--text);font-family:inherit;font-size:.96rem;transition:border-color .2s;
 }
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-.form-note{color:var(--muted);font-size:.8rem;margin-top:12px;line-height:1.5}
-
-/* ---------- Footer ---------- */
-.site-footer{border-top:1px solid var(--line);background:var(--bg-alt);padding:40px 0}
-.footer-inner{text-align:center}
-.footer-brand{display:inline-flex;align-items:center;gap:10px;margin-bottom:10px}
-.foo
+.field input:focus,.field textarea:
