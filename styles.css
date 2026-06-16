@@ -133,32 +133,8 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 
 /* About */
 .photo-frame{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line)}
-.photo-frame img{width:100%;height:100%;object-fit:cover}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:72% center}
 .photo-frame-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(12,13,16,.75))}
-.brand-frame{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  background:
-    radial-gradient(120% 120% at 50% 0%, rgba(240,180,41,.14), transparent 60%),
-    var(--panel);
-}
-.brand-frame::before{
-  content:"";position:absolute;inset:0;opacity:.5;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),
-                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:38px 38px;
-  -webkit-mask-image:radial-gradient(circle at 50% 40%, #000, transparent 72%);
-          mask-image:radial-gradient(circle at 50% 40%, #000, transparent 72%);
-}
-.brand-frame-mark{
-  position:relative;font-family:'Oswald',sans-serif;font-weight:700;line-height:1;
-  font-size:clamp(5rem,14vw,8rem);
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.brand-frame-text{
-  position:relative;font-family:'Oswald',sans-serif;font-weight:500;letter-spacing:5px;
-  font-size:.95rem;color:var(--muted);
-}
 .about-text h2{margin-top:.3rem}
 .about-text p{color:var(--muted);margin-top:1rem}
 .stat-row{list-style:none;display:flex;gap:34px;margin-top:2rem;flex-wrap:wrap}
