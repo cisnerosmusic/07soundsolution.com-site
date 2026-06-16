@@ -1,109 +1,83 @@
 # 07 Sound Solution - Sitio web
 
-Sitio web (EPK / portafolio) de **Adolfo "Fito" Martínez**, ingeniero de sonido con base en Miami, FL.
-Una sola página, bilingüe (Español / Inglés), estática - sin dependencias ni paso de compilación. Pensado para **GitHub Pages**.
+Sitio web (EPK / portafolio) de **Adolfo "Fito" Martínez**, ingeniero de sonido de sala (FOH) con base en Miami, FL. Ingeniero principal del emblemático **Willy Chirino**.
+
+Una sola página, bilingüe (Español / Inglés), estática, sin dependencias ni paso de compilación. Publicado en **GitHub Pages** con dominio propio `07soundsolution.com` (HTTPS activo).
+
+**En vivo:** https://07soundsolution.com
 
 ---
 
-## 📁 Estructura
+## Estructura
 
 ```
 .
-├── index.html          # La página (todo el contenido, ES + EN)
-├── styles.css          # Estilos (colores editables al inicio del archivo)
+├── index.html          # La página (todo el contenido, ES + EN) + JSON-LD SEO
+├── styles.css          # Estilos (colores editables en :root)
 ├── script.js           # Toggle de idioma, menú móvil, animaciones
 ├── CNAME               # Dominio personalizado: 07soundsolution.com
-├── .nojekyll           # Evita que GitHub Pages procese con Jekyll
-├── robots.txt          # SEO
-├── sitemap.xml         # SEO
+├── .nojekyll           # Evita el procesado Jekyll de GitHub Pages
+├── robots.txt          # SEO + permisos para crawlers de IA (GPTBot, ClaudeBot, etc.)
+├── llms.txt            # Ficha para asistentes de IA (ES + EN)
+├── humans.txt          # Creditos del proyecto
+├── sitemap.xml         # Mapa del sitio (con hreflang)
 └── assets/
-    └── img/            # Imágenes (placeholders - REEMPLAZAR por fotos reales)
-        ├── fito-portrait.jpg
-        ├── gallery-1.jpg … gallery-6.jpg
-        ├── og-image.jpg     # Imagen para vista previa al compartir
+    └── img/            # Imagenes (placeholders - REEMPLAZAR por fotos reales)
+        ├── gallery-1.jpg ... gallery-6.jpg
+        ├── og-image.jpg     # Imagen de vista previa al compartir
         └── favicon.svg
 ```
 
 ---
 
-## ✏️ Qué falta reemplazar (marcado en el sitio)
+## Que falta reemplazar
 
-Busca los corchetes `[ ]` en `index.html`. Lo principal:
+Busca los corchetes `[ ]` en `index.html`:
 
-- **Bio** (sección `#about`): los `[XX] años`, las cifras de las estadísticas y el segundo párrafo.
-- **Créditos** (sección `#credits`): `[Artista 2]` … `[Artista 8]` y el testimonio.
-- **Contacto** (sección `#contact`): teléfono, enlaces de Instagram / Facebook / YouTube / WhatsApp.
-- **Fotos**: reemplaza los archivos en `assets/img/` por fotos reales (mismos nombres = no hay que tocar el código).
+- **Creditos** (`#credits`): quedan placeholders `[Artista 5]` ... `[Artista 8]` y el testimonio. Ya integrados: Willy Chirino, Carlos Varela, X Alfonso, Diana Fuentes.
+- **Fotos**: reemplaza los archivos de `assets/img/` por fotos reales de Fito (mismos nombres = no hay que tocar el codigo). La foto de la seccion Bio es por ahora la marca "07".
 
-El texto en español y en inglés se edita en pares: cada elemento tiene `data-es="…"` y `data-en="…"`.
-Edita **ambos** para mantener el sitio bilingüe.
+El texto ES/EN se edita en pares: cada elemento tiene `data-es="..."` y `data-en="..."`. Edita **ambos**.
 
 ---
 
-## 🚀 Cómo publicarlo en GitHub Pages
+## Despliegue (GitHub Pages)
 
-### Opción A - Subir los archivos desde la web de GitHub (lo más fácil)
-1. Entra a `https://github.com/cisnerosmusic/07soundsolution.com-site`.
-2. **Add file → Upload files** y arrastra **todo** el contenido de esta carpeta (incluyendo la carpeta `assets`).
-3. Escribe un mensaje (ej. "primer sitio") y **Commit changes**.
-4. Ve a **Settings → Pages**.
-   - En **Source** elige **Deploy from a branch**.
-   - Branch: **main**, carpeta **/(root)**. Guarda.
-5. Espera 1-2 min. GitHub mostrará la URL temporal `https://cisnerosmusic.github.io/07soundsolution.com-site/`.
+Ya esta activo. Source: rama **main**, carpeta **/(root)**. Cualquier `push` a `main` se publica solo en 1-2 min.
 
-### Opción B - Desde la terminal (git)
-```bash
-git clone https://github.com/cisnerosmusic/07soundsolution.com-site.git
-cd 07soundsolution.com-site
-# copia aquí los archivos de esta carpeta, luego:
-git add .
-git commit -m "Primer sitio 07 Sound Solution"
-git push origin main
+DNS en GoDaddy (ya configurado):
+
 ```
-Luego activa Pages igual que en los pasos 4-5 de arriba.
+A      @     185.199.108.153
+A      @     185.199.109.153
+A      @     185.199.110.153
+A      @     185.199.111.153
+CNAME  www   cisnerosmusic.github.io
+```
+
+> El correo `info@07soundsolution.com` usa registros MX aparte (GoDaddy Professional Email / Microsoft 365) y no afecta a estos registros A.
 
 ---
 
-## 🌐 Conectar el dominio de GoDaddy (07soundsolution.com)
+## SEO y descubribilidad por IA
 
-El archivo **CNAME** ya está incluido con el dominio. Solo falta apuntar el DNS en GoDaddy:
-
-1. En GoDaddy: **My Products → Domain → DNS / Manage DNS**.
-2. Crea estos **4 registros A** (raíz `@`) apuntando a las IP de GitHub Pages:
-   ```
-   A   @   185.199.108.153
-   A   @   185.199.109.153
-   A   @   185.199.110.153
-   A   @   185.199.111.153
-   ```
-3. Crea un registro **CNAME** para el subdominio `www`:
-   ```
-   CNAME   www   cisnerosmusic.github.io
-   ```
-4. (Si GoDaddy ya tiene registros A/CNAME para `@` o `www` que apunten a otro sitio, elimínalos o edítalos).
-5. En GitHub **Settings → Pages → Custom domain** escribe `07soundsolution.com` y marca **Enforce HTTPS** (puede tardar unos minutos en habilitarse mientras se emite el certificado).
-
-> El DNS puede tardar desde minutos hasta 48 h en propagar, aunque normalmente es rápido.
+- **Datos estructurados JSON-LD**: `ProfessionalService` + `LocalBusiness` + `Person` + `WebSite`.
+- **Meta avanzado**: canonical, robots (max-image-preview), Open Graph, Twitter Card, geo-tags, keywords.
+- **`robots.txt`** permite explicitamente a los crawlers de IA (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, Bingbot, etc.).
+- **`llms.txt`** bilingue con ficha de servicios y contacto para asistentes de IA.
 
 ---
 
-## ✉️ Activar el formulario de contacto (opcional)
+## Formulario de contacto (opcional)
 
-El formulario está listo pero necesita un servicio que envíe el correo (GitHub Pages no procesa formularios).
-Lo más simple es **[Formspree](https://formspree.io)** (plan gratis):
-1. Crea una cuenta y un formulario nuevo; te darán un ID tipo `xityzabc`.
-2. En `index.html`, en la etiqueta `<form>`, reemplaza `your-form-id` por tu ID:
-   `action="https://formspree.io/f/xityzabc"`.
-
-Alternativa sin formulario: deja solo el correo y el botón de WhatsApp como contacto.
+El `<form>` esta listo pero necesita un servicio que envie el correo (GitHub Pages no procesa formularios). Lo mas simple es [Formspree](https://formspree.io): crea un formulario, copia tu ID y reemplaza `your-form-id` en la etiqueta `<form>` de `index.html`.
 
 ---
 
-## 🎨 Cambiar colores
+## Cambiar colores
 
-Al inicio de `styles.css`, en `:root`, están las variables:
-`--accent` (dorado) y `--accent-2` (naranja) controlan el color de acento. Cámbialas y se actualiza todo el sitio.
+En `styles.css`, dentro de `:root`: `--accent` (dorado) y `--accent-2` (naranja) controlan el acento de todo el sitio.
 
 ---
 
-*Hecho con cariño para Fito. Que cada nota llegue como debe ser. 🎚️*
+*Desarrollado por [Index01](https://index01.net) para Fito. Que cada nota llegue como debe ser.*
