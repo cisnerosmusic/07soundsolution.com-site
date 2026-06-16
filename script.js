@@ -49,8 +49,8 @@
     });
   }
 
-  /* ---- Scroll reveal ---- */
-  var reveals = [].slice.call(document.querySelectorAll(".section, .hero-inner"));
+  /* ---- Scroll reveal (hero excluded so above-the-fold paints immediately) ---- */
+  var reveals = [].slice.call(document.querySelectorAll(".section"));
   reveals.forEach(function (el) { el.setAttribute("data-reveal", ""); });
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
