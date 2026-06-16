@@ -13,6 +13,7 @@ Una sola página, bilingüe (Español / Inglés), estática, sin dependencias ni
 ```
 .
 ├── index.html          # La página (todo el contenido, ES + EN) + JSON-LD SEO
+├── gracias.html        # Página de confirmación tras enviar el formulario (noindex)
 ├── styles.css          # Estilos (colores editables en :root)
 ├── script.js           # Toggle de idioma, menú móvil, animaciones
 ├── CNAME               # Dominio personalizado: 07soundsolution.com
@@ -23,8 +24,8 @@ Una sola página, bilingüe (Español / Inglés), estática, sin dependencias ni
 ├── sitemap.xml         # Mapa del sitio (con hreflang)
 └── assets/
     └── img/
-        ├── og-image.jpg       # Imagen de vista previa al compartir
-        ├── fito-portrait.jpg  # Foto de Fito (disponible para la seccion Bio)
+        ├── og-image.jpg       # Tarjeta de marca 1200x630 (badge 07 + nombre) para vista previa al compartir
+        ├── fito-portrait.jpg  # Foto real de Fito (FOH) — usada en la sección Bio
         └── favicon.svg
 ```
 
@@ -32,9 +33,11 @@ Una sola página, bilingüe (Español / Inglés), estática, sin dependencias ni
 
 ## Estado del contenido
 
+- **Bio** (`#about`): usa una **foto real de Fito** en la consola de sala (FOH), `assets/img/fito-portrait.jpg`. Para cambiarla, reemplaza ese archivo (mismo nombre) o ajusta el encuadre con `object-position` en `.photo-frame img`.
+- **Servicios** (`#services`): 5 tarjetas con estética de **cristal (glass) sutil** + entrada animada una sola vez al entrar en pantalla. El estilo vive en `.card` de `styles.css`; respeta `prefers-reduced-motion`.
 - **Creditos** (`#credits`): lista definitiva de **16 artistas**, sin placeholders. Todas las tarjetas comparten el mismo estilo dorado. Para anadir o quitar un artista, edita los `<li class="credit">` en `index.html`.
 - **Galeria**: la seccion de galeria se **elimino** (no hay fotos reales por ahora). Para reincorporarla habria que volver a crear la `<section id="gallery">`, su enlace en el nav y los estilos `.gallery`/`.g-item`.
-- **Foto de Bio**: la seccion Bio usa por ahora la marca "07". Hay una foto disponible en `assets/img/fito-portrait.jpg` si se quiere usar mas adelante.
+- **Marca**: el lockup "07 + SOUND SOLUTION" (header, footer, OG y `gracias.html`) usa la fuente **Oswald** y el badge dorado por igual.
 
 El texto ES/EN se edita en pares: cada elemento tiene `data-es="..."` y `data-en="..."`. Edita **ambos**.
 
@@ -54,7 +57,7 @@ A      @     185.199.111.153
 CNAME  www   cisnerosmusic.github.io
 ```
 
-> El correo `info@07soundsolution.com` usa registros MX aparte (GoDaddy Professional Email / Microsoft 365) y no afecta a estos registros A.
+> El correo `info@07soundsolution.com` está **activo** (Microsoft 365 vía GoDaddy) y usa registros MX aparte, que no afectan a estos registros A. Acceso por webmail en `outlook.office.com` o la app de Outlook.
 
 ---
 
@@ -67,9 +70,14 @@ CNAME  www   cisnerosmusic.github.io
 
 ---
 
-## Formulario de contacto (opcional)
+## Formulario de contacto
 
-El `<form>` esta listo pero necesita un servicio que envie el correo (GitHub Pages no procesa formularios). Lo mas simple es [Formspree](https://formspree.io): crea un formulario, copia tu ID y reemplaza `your-form-id` en la etiqueta `<form>` de `index.html`.
+El formulario (`#contact`) está **conectado y operativo** mediante [FormSubmit](https://formsubmit.co): `action="https://formsubmit.co/info@07soundsolution.com"`. Los mensajes llegan al buzón `info@07soundsolution.com`.
+
+- Tras enviar, redirige a **`gracias.html`** (página de confirmación bilingüe, `noindex`).
+- Campos ocultos de FormSubmit: `_subject`, `_template=table`, `_captcha=false`, `_next` (la página de gracias) y un honeypot `_honey` anti-spam.
+- **Activación**: la primera vez que se envió, FormSubmit pidió confirmar por correo al buzón. Ya está activado.
+- Mejora opcional: usar el endpoint con código/alias de FormSubmit para no exponer el email en el HTML y reducir spam.
 
 ---
 
