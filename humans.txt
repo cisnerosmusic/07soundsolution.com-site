@@ -1,0 +1,13 @@
+/* TEAM */
+  Sound Engineer: Adolfo "Fito" Martinez
+  Role: Ingeniero de sonido principal (FOH) / Lead front-of-house engineer
+  Location: Miami, FL, USA
+  Contact: info [at] 07soundsolution.com
+  Phone: +1 (786) 306-6414
+
+/* SITE */
+  Name: 07 Sound Solution
+  Standards: HTML5, CSS3, JavaScript (vanilla)
+  Hosting: GitHub Pages
+  Languages: Espanol / English
+  Last update: 2026-06
