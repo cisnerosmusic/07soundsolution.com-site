@@ -169,12 +169,24 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 /* Cards / Services */
 .cards{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
 .card{
-  flex:1 1 320px;max-width:358px;
-  background:linear-gradient(160deg,rgba(240,180,41,.10),rgba(232,118,26,.04)),var(--panel);
-  border:1px solid var(--accent);border-radius:var(--radius);
-  padding:30px 26px;transition:transform .2s var(--ease),box-shadow .2s;
+  flex:1 1 320px;max-width:358px;position:relative;
+  background:linear-gradient(160deg,rgba(240,180,41,.12),rgba(232,118,26,.045));
+  -webkit-backdrop-filter:blur(9px) saturate(135%);
+  backdrop-filter:blur(9px) saturate(135%);
+  border:1px solid rgba(240,180,41,.5);border-radius:var(--radius);
+  padding:30px 26px;
+  box-shadow:0 1px 0 rgba(255,255,255,.12) inset,
+             0 20px 44px -24px rgba(0,0,0,.65),
+             0 0 34px -22px rgba(240,180,41,.40);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(240,180,41,.18)}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(240,180,41,.85);
+  box-shadow:0 1px 0 rgba(255,255,255,.16) inset,
+             0 30px 56px -24px rgba(0,0,0,.72),
+             0 0 46px -18px rgba(240,180,41,.60);
+}
 .card-icon{font-size:1.8rem;margin-bottom:.7rem}
 .card h3{font-size:1.25rem;margin-bottom:.5rem}
 .card p{color:var(--muted);font-size:.96rem}
@@ -183,6 +195,33 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
   letter-spacing:1px;color:var(--accent);font-size:.95rem;transition:opacity .2s;
 }
 .card-cta:hover{opacity:.8}
+
+/* Services — ambient depth (gives the glass something to refract) + one-time staggered entrance */
+#services{position:relative;overflow:hidden}
+#services::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 55% at 18% 12%, rgba(240,180,41,.10), transparent 60%),
+    radial-gradient(55% 55% at 86% 92%, rgba(232,118,26,.08), transparent 62%);
+}
+#services .container{position:relative;z-index:1}
+/* keep the section itself static — the cards carry the motion */
+#services[data-reveal]{opacity:1;transform:none}
+#services[data-reveal] .card{opacity:0}
+#services[data-reveal].in .card{opacity:1;animation:cardEnter .7s var(--ease) backwards}
+#services[data-reveal].in .card:nth-child(2){animation-delay:.09s}
+#services[data-reveal].in .card:nth-child(3){animation-delay:.18s}
+#services[data-reveal].in .card:nth-child(4){animation-delay:.27s}
+#services[data-reveal].in .card:nth-child(5){animation-delay:.36s}
+@keyframes cardEnter{
+  0%{opacity:0;transform:translateY(30px) scale(.985)}
+  60%{opacity:1;transform:translateY(-5px) scale(1.004)}
+  100%{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion: reduce){
+  #services[data-reveal] .card{opacity:1}
+  #services[data-reveal].in .card{animation:none}
+}
 
 /* Credits */
 .credits-grid{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:50px}
