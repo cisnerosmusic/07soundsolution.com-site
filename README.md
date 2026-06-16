@@ -22,20 +22,19 @@ Una sola página, bilingüe (Español / Inglés), estática, sin dependencias ni
 ├── humans.txt          # Creditos del proyecto
 ├── sitemap.xml         # Mapa del sitio (con hreflang)
 └── assets/
-    └── img/            # Imagenes (placeholders - REEMPLAZAR por fotos reales)
-        ├── gallery-1.jpg ... gallery-6.jpg
-        ├── og-image.jpg     # Imagen de vista previa al compartir
+    └── img/
+        ├── og-image.jpg       # Imagen de vista previa al compartir
+        ├── fito-portrait.jpg  # Foto de Fito (disponible para la seccion Bio)
         └── favicon.svg
 ```
 
 ---
 
-## Que falta reemplazar
+## Estado del contenido
 
-Busca los corchetes `[ ]` en `index.html`:
-
-- **Creditos** (`#credits`): quedan placeholders `[Artista 5]` ... `[Artista 8]` y el testimonio. Ya integrados: Willy Chirino, Carlos Varela, X Alfonso, Diana Fuentes.
-- **Fotos**: reemplaza los archivos de `assets/img/` por fotos reales de Fito (mismos nombres = no hay que tocar el codigo). La foto de la seccion Bio es por ahora la marca "07".
+- **Creditos** (`#credits`): lista definitiva de **16 artistas**, sin placeholders. Todas las tarjetas comparten el mismo estilo dorado. Para anadir o quitar un artista, edita los `<li class="credit">` en `index.html`.
+- **Galeria**: la seccion de galeria se **elimino** (no hay fotos reales por ahora). Para reincorporarla habria que volver a crear la `<section id="gallery">`, su enlace en el nav y los estilos `.gallery`/`.g-item`.
+- **Foto de Bio**: la seccion Bio usa por ahora la marca "07". Hay una foto disponible en `assets/img/fito-portrait.jpg` si se quiere usar mas adelante.
 
 El texto ES/EN se edita en pares: cada elemento tiene `data-es="..."` y `data-en="..."`. Edita **ambos**.
 
