@@ -235,7 +235,20 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 .socials a{font-family:'Oswald',sans-serif;letter-spacing:1px;color:var(--muted);font-size:.9rem;transition:color .2s}
 .socials a:hover{color:var(--accent)}
 
-.contact-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px}
+@property --torch{syntax:"<angle>";inherits:false;initial-value:0deg}
+.contact-form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px;position:relative}
+.contact-form::before{
+  content:"";position:absolute;inset:-2px;border-radius:calc(var(--radius) + 3px);z-index:-1;
+  background:conic-gradient(from var(--torch),
+    transparent 0deg 32deg,
+    rgba(240,180,41,.85) 70deg,
+    rgba(232,118,26,.80) 100deg,
+    transparent 140deg 360deg);
+  filter:blur(8px);opacity:.58;
+  animation:torchSpin 16s linear infinite;
+}
+@keyframes torchSpin{to{--torch:360deg}}
+@media (prefers-reduced-motion:reduce){.contact-form::before{animation:none;opacity:.4}}
 .field{margin-bottom:18px}
 .field label{display:block;font-family:'Oswald',sans-serif;letter-spacing:1px;font-size:.85rem;color:var(--muted);margin-bottom:6px}
 .field input,.field textarea{
