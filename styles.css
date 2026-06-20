@@ -113,11 +113,11 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
   -webkit-mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%);
           mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%)}
 .hw-layer{position:absolute;inset:0;width:100%;height:100%}
-.hw-sharp{-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 30%,#000 70%,transparent 100%);
-          mask-image:linear-gradient(to right,transparent 0%,#000 30%,#000 70%,transparent 100%)}
-.hw-blur{filter:blur(5px);
-  -webkit-mask-image:linear-gradient(to right,#000 0%,transparent 33%,transparent 67%,#000 100%);
-          mask-image:linear-gradient(to right,#000 0%,transparent 33%,transparent 67%,#000 100%)}
+.hw-sharp{-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 34%,rgba(0,0,0,1) 66%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 34%,rgba(0,0,0,1) 66%,rgba(0,0,0,0) 100%)}
+.hw-blur{filter:blur(6px);
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 66%,rgba(0,0,0,1) 100%);
+          mask-image:linear-gradient(to right,rgba(0,0,0,1) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 66%,rgba(0,0,0,1) 100%)}
 
 /* Buttons */
 .btn{
