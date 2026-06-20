@@ -147,3 +147,20 @@
     }, { threshold: 0 }).observe(sharp);
   } else { start(); }
 })();
+
+/* ============================================================
+   Contact card torch: one-shot delayed cinematic fade-in
+   ============================================================ */
+(function () {
+  "use strict";
+  var card = document.querySelector(".contact-form");
+  if (!card) return;
+  function lightUp() { setTimeout(function () { card.classList.add("lit"); }, 2000); }
+  if (!("IntersectionObserver" in window)) { lightUp(); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { lightUp(); io.disconnect(); }
+    });
+  }, { threshold: 0.35 });
+  io.observe(card);
+})();
