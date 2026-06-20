@@ -109,9 +109,9 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 .hero-lead{color:var(--muted);font-size:clamp(1rem,2.2vw,1.2rem);max-width:640px;margin:1.5rem auto 0}
 .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
 
-.hero-wave{position:absolute;left:0;right:0;bottom:-1px;z-index:1;line-height:0}
-.hero-wave svg{width:100%;height:110px}
-.hero-wave path{fill:var(--bg-alt)}
+.hero-wave{position:absolute;left:0;right:0;bottom:0;z-index:1;width:100%;height:170px;pointer-events:none;opacity:.42;
+  -webkit-mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%);
+          mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%)}
 
 /* Buttons */
 .btn{

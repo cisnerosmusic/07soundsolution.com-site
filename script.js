@@ -67,3 +67,77 @@
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+/* ============================================================
+   Hero audio wave (decorative bars) - lightweight Canvas 2D
+   ============================================================ */
+(function () {
+  "use strict";
+  var cv = document.getElementById("heroWave");
+  if (!cv) return;
+  var ctx = cv.getContext("2d");
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var GOLD = [240, 180, 41], ORANGE = [232, 118, 26];
+  var W = 0, H = 0, t0 = performance.now(), mx = 0, mxT = 0, running = false, raf = 0, last = 0;
+  var MIN = 1 / 30, FREQ = 3.0;
+
+  function rgba(c, a) { return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; }
+  function size() {
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = Math.max(1, Math.round(W * dpr));
+    cv.height = Math.max(1, Math.round(H * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function rr(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    var base = H, step = 11, bw = 5, maxh = H * 0.82, f = FREQ;
+    for (var x = 4; x < W; x += step) {
+      var u = x / W;
+      var e = Math.abs(
+        Math.sin(u * 9 * f + t * 1.4) * 0.5 +
+        Math.sin(u * 22 * f - t * 1.1) * 0.3 +
+        Math.sin(u * 4 * f + t * 0.6) * 0.2
+      );
+      var h = 4 + e * maxh + mx * 5;
+      if (h < 2) h = 2;
+      var g = ctx.createLinearGradient(0, base - h, 0, base);
+      g.addColorStop(0, rgba(GOLD, 0.9));
+      g.addColorStop(1, rgba(ORANGE, 0.5));
+      ctx.fillStyle = g;
+      rr(x, base - h, bw, h, 2);
+      ctx.fill();
+    }
+  }
+  function loop(now) {
+    if (!running) return;
+    raf = requestAnimationFrame(loop);
+    if ((now - last) / 1000 < MIN) return;
+    last = now;
+    mx += (mxT - mx) * 0.05;
+    draw((now - t0) / 1000);
+  }
+  function start() { if (running || reduce) return; running = true; last = 0; raf = requestAnimationFrame(loop); }
+  function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
+
+  size();
+  window.addEventListener("resize", function () { size(); if (reduce) draw(6); }, { passive: true });
+  window.addEventListener("pointermove", function (e) { mxT = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
+
+  if (reduce) { draw(6); }
+  else if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (en) {
+      en.forEach(function (x) { x.isIntersecting ? start() : stop(); });
+    }, { threshold: 0 }).observe(cv);
+  } else { start(); }
+})();
