@@ -70,12 +70,15 @@
 
 /* ============================================================
    Hero audio wave (decorative bars) - lightweight Canvas 2D
+   Sharp under the CTA, progressively blurred toward the edges
    ============================================================ */
 (function () {
   "use strict";
-  var cv = document.getElementById("heroWave");
-  if (!cv) return;
-  var ctx = cv.getContext("2d");
+  var sharp = document.getElementById("heroWave");
+  if (!sharp) return;
+  var blur = document.getElementById("heroWaveBlur");
+  var layers = [{ cv: sharp, ctx: sharp.getContext("2d") }];
+  if (blur) layers.push({ cv: blur, ctx: blur.getContext("2d") });
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var dpr = Math.min(window.devicePixelRatio || 1, 2);
   var GOLD = [240, 180, 41], ORANGE = [232, 118, 26];
@@ -84,13 +87,15 @@
 
   function rgba(c, a) { return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; }
   function size() {
-    var r = cv.getBoundingClientRect();
+    var r = sharp.getBoundingClientRect();
     W = r.width; H = r.height;
-    cv.width = Math.max(1, Math.round(W * dpr));
-    cv.height = Math.max(1, Math.round(H * dpr));
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (var i = 0; i < layers.length; i++) {
+      layers[i].cv.width = Math.max(1, Math.round(W * dpr));
+      layers[i].cv.height = Math.max(1, Math.round(H * dpr));
+      layers[i].ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
   }
-  function rr(x, y, w, h, r) {
+  function rr(ctx, x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
     ctx.arcTo(x + w, y, x + w, y + h, r);
@@ -99,7 +104,7 @@
     ctx.arcTo(x, y, x + w, y, r);
     ctx.closePath();
   }
-  function draw(t) {
+  function drawOne(ctx, t) {
     ctx.clearRect(0, 0, W, H);
     var base = H, step = 11, bw = 5, maxh = H * 0.82, f = FREQ;
     for (var x = 4; x < W; x += step) {
@@ -115,10 +120,11 @@
       g.addColorStop(0, rgba(GOLD, 0.9));
       g.addColorStop(1, rgba(ORANGE, 0.5));
       ctx.fillStyle = g;
-      rr(x, base - h, bw, h, 2);
+      rr(ctx, x, base - h, bw, h, 2);
       ctx.fill();
     }
   }
+  function draw(t) { for (var i = 0; i < layers.length; i++) drawOne(layers[i].ctx, t); }
   function loop(now) {
     if (!running) return;
     raf = requestAnimationFrame(loop);
@@ -138,6 +144,6 @@
   else if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (en) {
       en.forEach(function (x) { x.isIntersecting ? start() : stop(); });
-    }, { threshold: 0 }).observe(cv);
+    }, { threshold: 0 }).observe(sharp);
   } else { start(); }
 })();

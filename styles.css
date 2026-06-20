@@ -112,6 +112,12 @@ h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
 .hero-wave{position:absolute;left:0;right:0;bottom:0;z-index:1;width:100%;height:170px;pointer-events:none;opacity:.42;
   -webkit-mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%);
           mask-image:linear-gradient(to top,#000 0%,#000 48%,transparent 100%)}
+.hw-layer{position:absolute;inset:0;width:100%;height:100%}
+.hw-sharp{-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 30%,#000 70%,transparent 100%);
+          mask-image:linear-gradient(to right,transparent 0%,#000 30%,#000 70%,transparent 100%)}
+.hw-blur{filter:blur(5px);
+  -webkit-mask-image:linear-gradient(to right,#000 0%,transparent 33%,transparent 67%,#000 100%);
+          mask-image:linear-gradient(to right,#000 0%,transparent 33%,transparent 67%,#000 100%)}
 
 /* Buttons */
 .btn{
